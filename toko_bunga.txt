@@ -1,0 +1,167 @@
+{
+  "project": {
+    "name": "Website Toko Bunga Segar",
+    "description": "Website penjualan bunga segar berbasis PHP Native dan MySQL dengan fitur login, admin, user, keranjang belanja, checkout, dan payment gateway."
+  },
+  "technology": {
+    "frontend": ["HTML", "CSS", "JavaScript"],
+    "backend": "PHP Native",
+    "database": "MySQL",
+    "webserver": "Apache (XAMPP)",
+    "payment_gateway": "Midtrans API JSON"
+  },
+  "modules": {
+    "authentication": [
+      "Login",
+      "Register",
+      "Logout",
+      "Session Management"
+    ],
+    "user": [
+      "Home",
+      "Katalog Produk",
+      "Detail Produk",
+      "Keranjang Belanja",
+      "Checkout",
+      "Riwayat Pesanan"
+    ],
+    "admin": [
+      "Dashboard",
+      "Kelola Produk",
+      "Kelola User",
+      "Kelola Pesanan",
+      "Laporan Penjualan"
+    ],
+    "payment": [
+      "Generate Transaction",
+      "Payment Callback",
+      "Payment Status"
+    ]
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "fields": [
+          "id",
+          "nama",
+          "email",
+          "password",
+          "role"
+        ]
+      },
+      {
+        "name": "produk",
+        "fields": [
+          "id_produk",
+          "nama_produk",
+          "kategori",
+          "harga",
+          "stok",
+          "deskripsi",
+          "gambar"
+        ]
+      },
+      {
+        "name": "orders",
+        "fields": [
+          "id_order",
+          "id_user",
+          "tanggal",
+          "total_harga",
+          "status"
+        ]
+      },
+      {
+        "name": "order_detail",
+        "fields": [
+          "id_detail",
+          "id_order",
+          "id_produk",
+          "qty",
+          "subtotal"
+        ]
+      },
+      {
+        "name": "pembayaran",
+        "fields": [
+          "id_bayar",
+          "id_order",
+          "metode",
+          "transaction_id",
+          "payment_status"
+        ]
+      }
+    ]
+  },
+  "pages": {
+    "login": {
+      "components": [
+        "Email Input",
+        "Password Input",
+        "Login Button",
+        "Register Link"
+      ]
+    },
+    "admin": {
+      "pages": [
+        "Dashboard",
+        "Produk",
+        "User",
+        "Pesanan",
+        "Pembayaran",
+        "Laporan"
+      ]
+    },
+    "user": {
+      "pages": [
+        "Home",
+        "Produk",
+        "Detail Produk",
+        "Cart",
+        "Checkout",
+        "Riwayat Pesanan"
+      ]
+    }
+  },
+  "payment_gateway": {
+    "provider": "Midtrans",
+    "request_json": {
+      "transaction_details": {
+        "order_id": "ORDER-1001",
+        "gross_amount": 150000
+      },
+      "customer_details": {
+        "first_name": "Nama Pelanggan",
+        "email": "pelanggan@email.com",
+        "phone": "08123456789"
+      }
+    }
+  },
+  "workflow": [
+    "Register",
+    "Login",
+    "Lihat Produk",
+    "Tambah ke Keranjang",
+    "Checkout",
+    "Generate Payment JSON",
+    "Pembayaran",
+    "Konfirmasi Pembayaran",
+    "Pesanan Diproses",
+    "Pesanan Dikirim",
+    "Pesanan Selesai"
+  ],
+  "development_steps": [
+    "Membuat Database",
+    "Membuat Koneksi Database",
+    "Membuat Login dan Register",
+    "Membuat Dashboard Admin",
+    "Membuat CRUD Produk",
+    "Membuat Keranjang Belanja",
+    "Membuat Checkout",
+    "Integrasi Payment Gateway",
+    "Membuat Riwayat Transaksi",
+    "Membuat Laporan Penjualan",
+    "Testing dan Deployment"
+  ]
+}
