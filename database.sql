@@ -35,6 +35,7 @@ CREATE TABLE orders (
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_harga INT NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    alamat_pengiriman TEXT NULL,
     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

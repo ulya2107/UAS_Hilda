@@ -54,6 +54,7 @@ try {
 // Persiapkan format Request JSON untuk Midtrans sesuai spek toko_bunga.txt
 $midtrans_json = [];
 if ($order_data) {
+    $phone = $_SESSION['customer_phone'] ?? '08123456789';
     $midtrans_json = [
         "transaction_details" => [
             "order_id" => "ORDER-" . $order_data['id_order'],
@@ -62,9 +63,24 @@ if ($order_data) {
         "customer_details" => [
             "first_name" => $order_data['nama'],
             "email" => $order_data['email'],
-            "phone" => $_SESSION['customer_phone'] ?? '08123456789'
+            "phone" => $phone
         ]
     ];
+    
+    if (!empty($order_data['alamat_pengiriman'])) {
+        $midtrans_json['customer_details']['billing_address'] = [
+            "first_name" => $order_data['nama'],
+            "email" => $order_data['email'],
+            "phone" => $phone,
+            "address" => $order_data['alamat_pengiriman']
+        ];
+        $midtrans_json['customer_details']['shipping_address'] = [
+            "first_name" => $order_data['nama'],
+            "email" => $order_data['email'],
+            "phone" => $phone,
+            "address" => $order_data['alamat_pengiriman']
+        ];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -129,6 +145,12 @@ if ($order_data) {
                                     <td style="padding: 8px 0; color: var(--ink-mute);">Tanggal Pemesanan:</td>
                                     <td style="padding: 8px 0; text-align: right;"><?= date('d M Y, H:i', strtotime($order_data['tanggal'])) ?></td>
                                 </tr>
+                                <?php if (!empty($order_data['alamat_pengiriman'])): ?>
+                                <tr style="border-bottom: 1px solid var(--hairline);">
+                                    <td style="padding: 8px 0; color: var(--ink-mute); vertical-align: top;">Alamat Pengiriman:</td>
+                                    <td style="padding: 8px 0; text-align: right; font-weight: 500; max-width: 250px; word-wrap: break-word;"><?= htmlspecialchars($order_data['alamat_pengiriman']) ?></td>
+                                </tr>
+                                <?php endif; ?>
                                 <tr>
                                     <td style="padding: 8px 0; font-weight: 700;">Total Harus Dibayar:</td>
                                     <td style="padding: 8px 0; text-align: right; font-weight: 700; color: var(--primary); font-size: 16px;">Rp <?= number_format($order_data['total_harga'], 0, ',', '.') ?></td>

@@ -153,6 +153,14 @@ try {
                             </div>
                         </div>
 
+                        <!-- Shipping Address -->
+                        <?php if (!empty($order['alamat_pengiriman'])): ?>
+                            <div style="margin-top: 16px; padding: 12px 16px; background-color: var(--canvas-lavender); border-radius: var(--rounded-sm); font-size: 14px; text-align: left; border-left: 3px solid var(--primary);">
+                                <span style="color: var(--primary); font-weight: 700; display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Alamat Pengiriman:</span>
+                                <span style="color: var(--ink);"><?= htmlspecialchars($order['alamat_pengiriman']) ?></span>
+                            </div>
+                        <?php endif; ?>
+
                         <!-- Payment Method Info if paid -->
                         <?php if ($payment && $payment['payment_status'] === 'settlement'): ?>
                             <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dotted var(--hairline); font-size: 13px; color: var(--ink-mute); display: flex; gap: var(--spacing-xl);">

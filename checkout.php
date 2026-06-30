@@ -52,17 +52,20 @@ try {
 // Proses pembuatan pesanan ketika tombol ditekan
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($cart_items)) {
     $phone = trim($_POST['phone'] ?? '');
+    $address = trim($_POST['address'] ?? '');
     
     if (empty($phone)) {
         $error_msg = "Nomor telepon/kontak harus diisi.";
+    } elseif (empty($address)) {
+        $error_msg = "Alamat pengiriman harus diisi.";
     } else {
         try {
             // Mulai database transaction agar aman
             $db->beginTransaction();
             
             // 1. Simpan ke tabel orders
-            $stmt = $db->prepare("INSERT INTO orders (id_user, total_harga, status) VALUES (?, ?, 'pending')");
-            $stmt->execute([$_SESSION['user_id'], $grand_total]);
+            $stmt = $db->prepare("INSERT INTO orders (id_user, total_harga, status, alamat_pengiriman) VALUES (?, ?, 'pending', ?)");
+            $stmt->execute([$_SESSION['user_id'], $grand_total, $address]);
             $id_order = $db->lastInsertId();
             
             // 2. Loop & Simpan ke order_detail, serta kurangi stok produk
@@ -90,8 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($cart_items)) {
             $stmt_pay = $db->prepare("INSERT INTO pembayaran (id_order, payment_status) VALUES (?, 'pending')");
             $stmt_pay->execute([$id_order]);
             
-            // Simpan nomor telepon sementara ke session untuk request Midtrans jika perlu
+            // Simpan nomor telepon dan alamat sementara ke session untuk request Midtrans jika perlu
             $_SESSION['customer_phone'] = $phone;
+            $_SESSION['customer_address'] = $address;
             
             // Commit transaction
             $db->commit();
@@ -158,6 +162,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($cart_items)) {
                         <label for="phone" class="form-label">Nomor Telepon / Kontak Whatsapp</label>
                         <input type="text" name="phone" id="phone" class="text-input" placeholder="Contoh: 081234567890" required value="<?= isset($_SESSION['customer_phone']) ? htmlspecialchars($_SESSION['customer_phone']) : '' ?>">
                         <span class="caption">Diperlukan untuk konfirmasi pengiriman bunga oleh kurir kami.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="form-label">Alamat Pengiriman</label>
+                        <textarea name="address" id="address" class="text-input" rows="4" placeholder="Masukkan alamat lengkap tujuan pengiriman (Nama Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kode Pos)" required style="resize: vertical; min-height: 100px;"><?= isset($_SESSION['customer_address']) ? htmlspecialchars($_SESSION['customer_address']) : '' ?></textarea>
+                        <span class="caption">Alamat lengkap pengantaran buket bunga segar.</span>
                     </div>
                 </div>
 

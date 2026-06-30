@@ -234,6 +234,11 @@ if ($action === 'list') {
                             <p style="color: var(--ink-mute);"><?= htmlspecialchars($order_data['email']) ?></p>
                             <p style="margin-top: 10px; color: var(--ink-mute);">Tanggal Order:</p>
                             <p><strong><?= date('d M Y, H:i', strtotime($order_data['tanggal'])) ?></strong></p>
+                            
+                            <?php if (!empty($order_data['alamat_pengiriman'])): ?>
+                                <p style="margin-top: 10px; color: var(--ink-mute);">Alamat Pengiriman:</p>
+                                <p style="background-color: var(--canvas-cream); padding: 8px 12px; border-radius: var(--rounded-sm); font-size: 13px; line-height: 1.4; word-wrap: break-word; color: var(--ink); border: 1px solid var(--hairline);"><?= htmlspecialchars($order_data['alamat_pengiriman']) ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
 
