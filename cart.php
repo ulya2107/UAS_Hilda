@@ -80,7 +80,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 'harga' => $prod['harga'],
                 'stok' => $prod['stok'],
                 'qty' => $qty,
-                'subtotal' => $subtotal
+                'subtotal' => $subtotal,
+                'kategori' => $prod['kategori'],
+                'deskripsi' => $prod['deskripsi']
             ];
         }
     } catch (PDOException $e) {
@@ -161,6 +163,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                                             </td>
                                             <td>
                                                 <strong><?= htmlspecialchars($item['nama_produk']) ?></strong>
+                                                <?php if ($item['kategori'] === 'Custom'): ?>
+                                                    <div style="font-size: 12px; color: var(--ink-mute); white-space: pre-wrap; margin-top: 4px; line-height: 1.4; text-align: left;"><?= htmlspecialchars($item['deskripsi']) ?></div>
+                                                <?php endif; ?>
                                             </td>
                                             <td>Rp <?= number_format($item['harga'], 0, ',', '.') ?></td>
                                             <td>

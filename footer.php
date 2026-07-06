@@ -17,10 +17,10 @@
         <div class="footer-column">
             <h3>Koleksi Bunga</h3>
             <ul>
-                <li><a href="index.php?kategori=Mawar">Mawar Klasik</a></li>
-                <li><a href="index.php?kategori=Lily">Lily Elegan</a></li>
-                <li><a href="index.php?kategori=Tulip">Tulip Mewah</a></li>
-                <li><a href="index.php?kategori=Buket">Buket Spesial</a></li>
+                <li><a href="index.php?kategori=Mawar">Mawar </a></li>
+                <li><a href="index.php?kategori=Lily">Lily </a></li>
+                <li><a href="index.php?kategori=Tulip">Tulip </a></li>
+                <li><a href="custom_bouquet.php">Buket Custom</a></li>
             </ul>
         </div>
 
@@ -28,10 +28,10 @@
         <div class="footer-column">
             <h3>Bantuan</h3>
             <ul>
-                <li><a href="#">Cara Pemesanan</a></li>
-                <li><a href="#">Kebijakan Pengembalian</a></li>
-                <li><a href="#">Lacak Pengiriman</a></li>
-                <li><a href="#">Hubungi Kami</a></li>
+                <li><a href="cara_pemesanan.php">Cara Pemesanan</a></li>
+                <li><a href="kebijakan_pengembalian.php">Kebijakan Pengembalian</a></li>
+                <li><a href="lacak_pengiriman.php">Lacak Pengiriman</a></li>
+                <li><a href="hubungi_kami.php">Hubungi Kami</a></li>
             </ul>
         </div>
 
@@ -40,7 +40,7 @@
             <h3>Hubungi Kami</h3>
             <p style="color: var(--on-aubergine-mute); font-size: 14px; margin-bottom: 8px;">Email: hello@fleurist.com</p>
             <p style="color: var(--on-aubergine-mute); font-size: 14px; margin-bottom: 8px;">Telepon: (021) 8888-9999</p>
-            <p style="color: var(--on-aubergine-mute); font-size: 14px;">Alamat: Jl. Bunga Indah No. 45, Jakarta</p>
+            <p style="color: var(--on-aubergine-mute); font-size: 14px;">Alamat: Jl. Pelor Mas I No. 13, Mataram</p>
         </div>
     </div>
     

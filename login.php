@@ -41,7 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($user['role'] === 'admin') {
                     header("refresh:1.5;url=admin/dashboard.php");
                 } else {
-                    header("refresh:1.5;url=index.php");
+                    if (isset($_SESSION['redirect_url'])) {
+                        $redirect = $_SESSION['redirect_url'];
+                        unset($_SESSION['redirect_url']);
+                        header("refresh:1.5;url=" . $redirect);
+                    } else {
+                        header("refresh:1.5;url=index.php");
+                    }
                 }
             } else {
                 $error = "Email atau password salah.";

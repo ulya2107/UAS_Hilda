@@ -26,6 +26,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- Navigation Links -->
         <div style="display: flex; gap: var(--spacing-xl); align-items: center;">
             <a href="index.php" style="color: <?= $current_page === 'index.php' || $current_page === 'detail.php' ? 'var(--primary)' : 'var(--ink)' ?>; font-weight: 600; font-size: 15px; text-decoration: none;">Katalog Bunga</a>
+            <a href="custom_bouquet.php" style="color: <?= $current_page === 'custom_bouquet.php' ? 'var(--primary)' : 'var(--ink)' ?>; font-weight: 600; font-size: 15px; text-decoration: none;">Buket Custom</a>
             <a href="riwayat.php" style="color: <?= $current_page === 'riwayat.php' ? 'var(--primary)' : 'var(--ink)' ?>; font-weight: 600; font-size: 15px; text-decoration: none;">Riwayat Belanja</a>
             
             <!-- Cart Icon with Badge -->

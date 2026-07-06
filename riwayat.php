@@ -30,7 +30,7 @@ try {
 
     // Loop untuk mengambil item detail di setiap order
     foreach ($user_orders as $order) {
-        $stmt_items = $db->prepare("SELECT order_detail.*, produk.nama_produk, produk.gambar 
+        $stmt_items = $db->prepare("SELECT order_detail.*, produk.nama_produk, produk.gambar, produk.kategori, produk.deskripsi 
                                     FROM order_detail 
                                     JOIN produk ON order_detail.id_produk = produk.id_produk 
                                     WHERE order_detail.id_order = ?");
@@ -140,14 +140,19 @@ try {
                             <h4 style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: var(--spacing-sm);">Rincian Item Bunga:</h4>
                             <div style="display: flex; flex-direction: column; gap: 8px;">
                                 <?php foreach ($items as $item): ?>
-                                    <div style="display: flex; justify-content: space-between; align-items: center; background-color: var(--canvas-cream); padding: 8px 16px; border-radius: var(--rounded-sm); font-size: 14px;">
-                                        <div style="display: flex; align-items: center; gap: 12px;">
-                                            <?php if ($item['gambar'] && file_exists('uploads/' . $item['gambar'])): ?>
-                                                <img src="uploads/<?= htmlspecialchars($item['gambar']) ?>" alt="flower" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px;">
-                                            <?php endif; ?>
-                                            <span><strong><?= htmlspecialchars($item['nama_produk']) ?></strong></span>
+                                    <div style="background-color: var(--canvas-cream); padding: 12px 16px; border-radius: var(--rounded-sm); font-size: 14px; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: start; gap: 12px; flex-wrap: wrap;">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <?php if ($item['gambar'] && file_exists('uploads/' . $item['gambar'])): ?>
+                                                    <img src="uploads/<?= htmlspecialchars($item['gambar']) ?>" alt="flower" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px;">
+                                                <?php endif; ?>
+                                                <span><strong><?= htmlspecialchars($item['nama_produk']) ?></strong></span>
+                                            </div>
+                                            <span style="color: var(--ink-mute); white-space: nowrap;"><?= $item['qty'] ?> pcs x Rp <?= number_format($item['subtotal'] / $item['qty'], 0, ',', '.') ?></span>
                                         </div>
-                                        <span style="color: var(--ink-mute);"><?= $item['qty'] ?> pcs x Rp <?= number_format($item['subtotal'] / $item['qty'], 0, ',', '.') ?></span>
+                                        <?php if ($item['kategori'] === 'Custom'): ?>
+                                            <div style="font-size: 12px; color: var(--ink-mute); white-space: pre-wrap; margin-top: 6px; line-height: 1.4; text-align: left;"><?= htmlspecialchars($item['deskripsi']) ?></div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
                             </div>

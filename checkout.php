@@ -42,7 +42,9 @@ try {
             'nama_produk' => $prod['nama_produk'],
             'harga' => $prod['harga'],
             'qty' => $qty,
-            'subtotal' => $subtotal
+            'subtotal' => $subtotal,
+            'kategori' => $prod['kategori'],
+            'deskripsi' => $prod['deskripsi']
         ];
     }
 } catch (PDOException $e) {
@@ -178,12 +180,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($cart_items)) {
                     <!-- Item List -->
                     <div style="max-height: 250px; overflow-y: auto; margin-bottom: var(--spacing-lg); border-bottom: 1px solid var(--hairline); padding-bottom: 16px;">
                         <?php foreach ($cart_items as $item): ?>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 14px;">
-                                <div>
-                                    <span style="font-weight: 700; color: var(--ink);"><?= htmlspecialchars($item['nama_produk']) ?></span>
-                                    <span style="color: var(--ink-mute); font-size: 13px; display: block;"><?= $item['qty'] ?> x Rp <?= number_format($item['harga'], 0, ',', '.') ?></span>
+                            <div style="margin-bottom: 12px; font-size: 14px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+                                    <div>
+                                        <span style="font-weight: 700; color: var(--ink);"><?= htmlspecialchars($item['nama_produk']) ?></span>
+                                        <span style="color: var(--ink-mute); font-size: 13px; display: block;"><?= $item['qty'] ?> x Rp <?= number_format($item['harga'], 0, ',', '.') ?></span>
+                                    </div>
+                                    <span style="font-weight: 700; color: var(--ink); white-space: nowrap;">Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></span>
                                 </div>
-                                <span style="font-weight: 700; color: var(--ink);">Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></span>
+                                <?php if ($item['kategori'] === 'Custom'): ?>
+                                    <div style="font-size: 12px; color: var(--ink-mute); white-space: pre-wrap; margin-top: 4px; line-height: 1.4; text-align: left;"><?= htmlspecialchars($item['deskripsi']) ?></div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

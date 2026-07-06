@@ -105,6 +105,7 @@ try {
                 Koleksi buket bunga premium impor yang dipetik langsung dan dirangkai dengan kasih sayang oleh florist ahli untuk menyampaikan perasaan Anda secara sempurna.
             </p>
             <a href="#katalog" class="btn btn-primary-pill">Lihat Katalog Bunga</a>
+            <a href="custom_bouquet.php" class="btn btn-secondary-pill" style="margin-left: 8px; padding: 14px 28px; box-shadow: rgba(0,0,0,0.05) 0 5px 15px 0;">Rangkai Buket Custom</a>
         </div>
     </div>
 
