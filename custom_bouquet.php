@@ -239,6 +239,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             position: sticky;
             top: 100px;
         }
+        
+        /* Preset Option Card Styling */
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .preset-card {
+            background-color: var(--canvas);
+            border: 1px solid var(--hairline);
+            border-radius: var(--rounded-lg);
+            overflow: hidden;
+            box-shadow: rgba(0, 0, 0, 0.03) 0 4px 12px 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 4px solid var(--hairline);
+        }
+        .preset-card:hover {
+            transform: translateY(-4px);
+            box-shadow: rgba(74, 21, 75, 0.1) 0 10px 25px 0;
+            border-bottom-color: var(--primary);
+        }
+        .preset-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--hairline);
+        }
+        .preset-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .preset-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .preset-desc {
+            font-size: 12px;
+            color: var(--ink-mute);
+            margin-bottom: 12px;
+            line-height: 1.4;
+            flex: 1;
+        }
+        .preset-details {
+            font-size: 11px;
+            background-color: var(--canvas-lavender);
+            padding: 8px 12px;
+            border-radius: var(--rounded-sm);
+            margin-bottom: 14px;
+            line-height: 1.5;
+            color: var(--primary);
+        }
+        .btn-use-preset {
+            width: 100%;
+            background-color: var(--canvas-lavender);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 0;
+            border-radius: var(--rounded-pill);
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .btn-use-preset:hover {
+            background-color: var(--primary);
+            color: var(--on-primary);
+        }
     </style>
 </head>
 <body style="background-color: var(--canvas-cream);">
@@ -258,6 +333,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (!empty($error_msg)): ?>
             <div class="alert alert-danger" style="margin-bottom: var(--spacing-xl);"><?= $error_msg ?></div>
         <?php endif; ?>
+
+        <!-- Section Inspirasi Buket -->
+        <div class="admin-card" style="padding: 28px; margin-bottom: 40px; border-left: 4px solid var(--primary);">
+            <h2 class="heading-sm" style="color: var(--primary); margin-bottom: 6px;">Bingung Rangkai Bunga? Gunakan Inspirasi Buket Populer Kami</h2>
+            <p class="caption" style="margin-bottom: var(--spacing-xl);">Klik tombol "Gunakan Desain Ini" pada salah satu pilihan di bawah untuk mengisi form custom secara otomatis. Anda masih bisa mengedit komposisinya!</p>
+            
+            <div class="presets-grid">
+                <!-- Preset 1: Romance Red -->
+                <div class="preset-card">
+                    <img src="uploads/preset_romance.png" alt="Romance Red Bouquet" class="preset-img">
+                    <div class="preset-content">
+                        <h3 class="preset-title">Buket Romance Red</h3>
+                        <p class="preset-desc">Kombinasi klasik mawar merah romantis melambangkan cinta mendalam. Cocok untuk hadiah anniversary atau hari kasih sayang.</p>
+                        <div class="preset-details">
+                            <strong>Komposisi:</strong> Medium size, 12 Mawar Merah, 3 Baby's Breath, 2 Eucalyptus. Bungkus Pink, Pita Satin Pink.
+                        </div>
+                        <button type="button" class="btn-use-preset" onclick="loadPreset('romance')">Gunakan Desain Ini</button>
+                    </div>
+                </div>
+
+                <!-- Preset 2: Elegant Lily -->
+                <div class="preset-card">
+                    <img src="uploads/preset_lily.png" alt="Elegant Lily Bouquet" class="preset-img">
+                    <div class="preset-content">
+                        <h3 class="preset-title">Buket Elegant Lily</h3>
+                        <p class="preset-desc">Rangkaian lily putih elegan dengan aroma menenangkan, melambangkan keanggunan, ketulusan, dan harapan murni.</p>
+                        <div class="preset-details">
+                            <strong>Komposisi:</strong> Medium size, 6 Lily Putih, 4 Baby's Breath, 4 Eucalyptus. Bungkus Putih, Pita Satin Gold.
+                        </div>
+                        <button type="button" class="btn-use-preset" onclick="loadPreset('lily')">Gunakan Desain Ini</button>
+                    </div>
+                </div>
+
+                <!-- Preset 3: Sunshine Tulip -->
+                <div class="preset-card">
+                    <img src="uploads/preset_tulip.png" alt="Sunshine Tulip Bouquet" class="preset-img">
+                    <div class="preset-content">
+                        <h3 class="preset-title">Buket Sunshine Tulip</h3>
+                        <p class="preset-desc">Bunga tulip kuning cerah dipadukan pembungkus kertas kraft coklat rustic untuk keceriaan dan kehangatan.</p>
+                        <div class="preset-details">
+                            <strong>Komposisi:</strong> Small size, 8 Tulip Kuning, 2 Baby's Breath. Bungkus Kraft (Rustic), Pita Satin Gold.
+                        </div>
+                        <button type="button" class="btn-use-preset" onclick="loadPreset('tulip')">Gunakan Desain Ini</button>
+                    </div>
+                </div>
+
+                <!-- Preset 4: Luxurious Mixed -->
+                <div class="preset-card">
+                    <img src="uploads/preset_mixed.png" alt="Luxurious Mixed Bouquet" class="preset-img">
+                    <div class="preset-content">
+                        <h3 class="preset-title">Buket Luxurious Mixed</h3>
+                        <p class="preset-desc">Rangkaian kombinasi mawar merah dan lily putih ukuran besar yang megah untuk kesan mewah yang mendalam.</p>
+                        <div class="preset-details">
+                            <strong>Komposisi:</strong> Large size, 15 Mawar Merah, 8 Lily Putih, 8 Baby's Breath, 4 Eucalyptus. Bungkus Hitam, Pita Satin Gold.
+                        </div>
+                        <button type="button" class="btn-use-preset" onclick="loadPreset('mixed')">Gunakan Desain Ini</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Form Pembuatan Buket Custom -->
         <form action="" method="POST" id="custom-bouquet-form">
@@ -496,6 +631,112 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // 5. Grand Total Display
             document.getElementById('grand-total-display').textContent = formatRupiah(totalHarga);
+        }
+
+        // Data Preset untuk pengisian form otomatis
+        const presets = {
+            romance: {
+                size: 'medium',
+                flowers: {
+                    mawar: 12,
+                    lily: 0,
+                    tulip: 0,
+                    babys_breath: 3,
+                    eucalyptus: 2
+                },
+                wrap: 'Pink Pastel',
+                ribbon: 'Satin Pink'
+            },
+            lily: {
+                size: 'medium',
+                flowers: {
+                    mawar: 0,
+                    lily: 6,
+                    tulip: 0,
+                    babys_breath: 4,
+                    eucalyptus: 4
+                },
+                wrap: 'Putih Klasik',
+                ribbon: 'Satin Gold'
+            },
+            tulip: {
+                size: 'small',
+                flowers: {
+                    mawar: 0,
+                    lily: 0,
+                    tulip: 8,
+                    babys_breath: 2,
+                    eucalyptus: 0
+                },
+                wrap: 'Kraft Paper (Rustic)',
+                ribbon: 'Satin Gold'
+            },
+            mixed: {
+                size: 'large',
+                flowers: {
+                    mawar: 15,
+                    lily: 8,
+                    tulip: 0,
+                    babys_breath: 8,
+                    eucalyptus: 4
+                },
+                wrap: 'Hitam Elegan',
+                ribbon: 'Satin Gold'
+            }
+        };
+
+        function loadPreset(presetKey) {
+            const data = presets[presetKey];
+            if (!data) return;
+
+            // 1. Set Size
+            const sizeRadio = document.querySelector(`input[name="size"][value="${data.size}"]`);
+            if (sizeRadio) {
+                sizeRadio.checked = true;
+                selectSize(data.size);
+            }
+
+            // 2. Set Flowers
+            Object.keys(flowersData).forEach(key => {
+                const qtyInput = document.getElementById('qty-' + key);
+                if (qtyInput) {
+                    qtyInput.value = data.flowers[key] !== undefined ? data.flowers[key] : 0;
+                }
+            });
+
+            // 3. Set Wrapping Paper
+            const wrapSelect = document.getElementById('wrap');
+            if (wrapSelect) {
+                wrapSelect.value = data.wrap;
+            }
+
+            // 4. Set Ribbon
+            const ribbonSelect = document.getElementById('ribbon');
+            if (ribbonSelect) {
+                ribbonSelect.value = data.ribbon;
+            }
+
+            // Update the display summary
+            updateSummary();
+
+            // Smooth scroll to the form
+            const formElement = document.getElementById('custom-bouquet-form');
+            if (formElement) {
+                window.scrollTo({
+                    top: formElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Flash visual effect to highlight the form
+            const formCard = document.querySelector('.custom-grid .admin-card');
+            if (formCard) {
+                formCard.style.transition = 'outline 0.3s ease';
+                formCard.style.outline = '3px solid var(--primary)';
+                setTimeout(() => {
+                    formCard.style.outline = '3px solid transparent';
+                }, 1000);
+            }
         }
 
         // Jalankan kalkulator pertama kali saat halaman dimuat
