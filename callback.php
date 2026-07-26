@@ -16,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($id_order <= 0 || empty($payment_type)) {
         $error = "Data pembayaran tidak valid.";
     } else {
+        // Ambil transaction_id jika dikirim dari real Midtrans, buat simulasi jika kosong
+        $transaction_id = trim($_POST['transaction_id'] ?? '');
+        if (empty($transaction_id)) {
+            $transaction_id = "MID-TX-" . strtoupper(uniqid());
+        }
+
         try {
             // Mulai transaksi database
             $db->beginTransaction();
@@ -23,9 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 1. Update status di orders menjadi 'paid'
             $stmt = $db->prepare("UPDATE orders SET status = 'paid' WHERE id_order = ?");
             $stmt->execute([$id_order]);
-
-            // 2. Generate random transaction ID dari Midtrans
-            $transaction_id = "MID-TX-" . strtoupper(uniqid());
 
             // 3. Update atau Insert data di tabel pembayaran
             // Cek apakah data pembayaran sudah ada

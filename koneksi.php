@@ -13,4 +13,9 @@ try {
 } catch (PDOException $e) {
     die("Koneksi database gagal: " . $e->getMessage());
 }
+
+// Konfigurasi Midtrans Payment Gateway (Sandbox/Testing secara default)
+define('MIDTRANS_SERVER_KEY', 'SB-Mid-server-fJmZ55V9_7P7Y9-L65R7J2nB'); // Silakan ganti dengan Server Key Sandbox Anda
+define('MIDTRANS_CLIENT_KEY', 'SB-Mid-client-nS9r_NlF22Q2J7vK'); // Silakan ganti dengan Client Key Sandbox Anda
+define('MIDTRANS_IS_PRODUCTION', false); // Set ke true jika menggunakan akun production (Live)
 ?>
